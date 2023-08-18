@@ -52,7 +52,7 @@ TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim6;
 
 /* USER CODE BEGIN PV */
-
+uint8_t dir = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -72,6 +72,10 @@ void user_define_func(void)
 	OLED_Clear();
 	oled_str(result, 0, 0, ssd1306xled_font6x8);
 	oled_RefreshGram();
+	if (strcmp(result, "00FFA857") == 0)
+		dir = 1;
+	else if (strcmp(result, "00FFC837") == 0)
+		dir = 0;
 }
 
 
@@ -134,7 +138,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    motor_drive(0, 10);
+    motor_drive(dir, 10);
 
     /* USER CODE END WHILE */
 
